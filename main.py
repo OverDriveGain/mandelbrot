@@ -8,8 +8,8 @@ SIZE = 700 # Image size
 
 # Convert from number of iterations to RGB
 def getColour(i):
-    color = 255 * array(colorsys.hsv_to_rgb(i / 255.0, 0.4, 0.4))
-    return tuple(color.astype(int))
+    color = (0.4, 0.4, i*10/255.0)
+    return color
 
 # function defining a mandelbrot
 def mandelbrot(x, y, iterations = ITERATIONS):
@@ -19,7 +19,7 @@ def mandelbrot(x, y, iterations = ITERATIONS):
         if abs(c) > 2:
             return getColour(i)
         c = c * c + c0
-    return (0, 0, 0)
+    return (0.4, 0.4, ITERATIONS/255.0)
 
 
 # creating the new image in RGB mode
@@ -30,7 +30,7 @@ def mandelSet(frameCount):
        # print("%.2f %%" % (x / SIZE * 100.0))
         for y in range(SIZE):
             pixels[y, x] = mandelbrot((x - (0.75 * SIZE)) / (SIZE / 2),
-                                      (y - (SIZE / 2)) / (SIZE / 2), frameCount)
+                                      (y - (0.5 * SIZE)) / (SIZE / 2), frameCount)
     return pixels
 
 
